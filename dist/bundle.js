@@ -8055,6 +8055,8 @@ webpackJsonp([0],[
 	}(_react2.default.Component);
 
 	exports.default = App;
+	;
+
 	var AppContainer = exports.AppContainer = (0, _reactRedux.connect)(function (state) {
 	    return state.toJS();
 	}, actions)(App);
@@ -8901,7 +8903,7 @@ webpackJsonp([0],[
 	    var ready = new Promise(function (resolve) {
 	        require(['esri/Map', 'esri/views/MapView', 'esri/geometry/Point', 'esri/geometry/ScreenPoint', 'esri/geometry/SpatialReference', 'esri/geometry/support/webMercatorUtils', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/FeatureLayer', 'esri/layers/support/Field', 'esri/widgets/Search', 'esri/widgets/Locate'], function (Map, MapView, Point, ScreenPoint, SpatialReference, webMercatorUtils, PictureMarkerSymbol, FeatureLayer, Field, Search, Locate) {
 	            var map = new Map({
-	                basemap: 'streets'
+	                basemap: 'streets-vector'
 	            });
 
 	            view = new MapView({

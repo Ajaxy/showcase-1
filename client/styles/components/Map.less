@@ -1,0 +1,20 @@
+:local(.map-view), :local(.map-container) {
+  width: 100%;
+  height: 100%;
+}
+
+.esri-popup-main {
+  width: 280px!important;
+
+  .esri-popup-content {
+    max-height: 300px!important;;
+  }
+
+  :local(.disable-balloon-close) & .esri-close {
+    display: none;
+  }
+
+  .url {
+    font-size: 10px;
+  }
+}

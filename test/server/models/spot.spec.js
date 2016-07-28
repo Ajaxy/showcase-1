@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {fromJS} from 'Immutable';
 
 import * as helpers from '../../helpers';
-import Spot from '/server/models/Spot';
+import Spot from '../../../server/models/Spot';
 
 const mock = fromJS({
     lat: 55.7558,
     long: 37.6173,
     firstName: 'John',
     lastName: 'Doe',
-    contactNumber: '+18776092233',
+    contactNumber: '+18 777 6092 233',
     email: 'john@doe.com',
     bloodGroup: 2
 });

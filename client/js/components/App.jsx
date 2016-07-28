@@ -6,10 +6,8 @@ import Map from './Map';
 
 export default class App extends React.Component {
     render () {
-        return (
-            <Map {...this.props} />
-        );
+        return <Map {...this.props} />;
     }
-}
+};
 
 export const AppContainer = connect((state) => state.toJS(), actions)(App);

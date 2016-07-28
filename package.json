@@ -1,10 +1,8 @@
 {
   "name": "showcase-1",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "keywords": [],
-  "author": "",
+  "author": "Alexander Zinchuk",
   "license": "ISC",
   "scripts": {
     "dev:client": "webpack && webpack-dev-server",

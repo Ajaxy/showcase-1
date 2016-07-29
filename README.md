@@ -1,3 +1,6 @@
+# Demo
+http://showcase-1.zinchuk.com:8080/
+
 # Install and run
 
 1. Navigate to project root path

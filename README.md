@@ -16,7 +16,7 @@ Client-side is a SPA with **immutable** app state stored in **Redux Store**. Sta
 
 Geographical map is created and managed by **ArcGIS JS API**.
 
-**Mocha** is used as a BDD framework to describe specifications along with chai testing utilities.
+**Mocha** is used as a BDD framework to describe specifications along with **chai** testing utilities.
 
 Project is written in **JavaScript** with benefits of **ECMAScript 6** standard provided by **Babel**. **Webpack** is used as project bundler along with server middleware dev tools such as **React Hot Loader** and **hot module replacement**.
 

@@ -54,7 +54,7 @@ export default (state = Map(), action) => {
             return state.remove('spot');
 
         case 'LOAD_SPOT':
-            return setFromJs(state, spot, action.spot);
+            return setFromJs(state, 'spot', action.spot);
     }
 
     return state;

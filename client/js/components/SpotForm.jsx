@@ -92,7 +92,7 @@ export default class SpotForm extends React.Component {
                 <div className="clearfix"></div>
                 <input type="tel"
                        name="contactNumber"
-                       placeholder="+12 345 6789 012"
+                       placeholder="Tel: +12 345 6789 012"
                        pattern="^(00|\+)\d{2} \d{3} \d{4} \d{3}$"
                        maxLength="17"
                        value={this.state.contactNumber}

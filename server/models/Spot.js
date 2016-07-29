@@ -37,7 +37,7 @@ const spotSchema = new Schema({
         type: String,
         required: true,
         validate: {
-            validator: (v) => /^(00|\+)\d{2} \d{3} \d{4} \d{3}$/.test(v),
+            validator: (v) => new RegExp(config.PHONE_NUMBER_FORMAT).test(v),
             message: '{VALUE} is not a valid phone number!'
         }
     },

@@ -50,7 +50,7 @@ export default class SpotForm extends React.Component {
                 .replace(/( \d{4})/, '$1 ')
                 .replace(/\s$/, '');
 
-            if (value[0] != '0') {
+            if (value.length > 0 && value[0] != '0') {
                 value = '+' + value;
             }
         }
@@ -93,7 +93,7 @@ export default class SpotForm extends React.Component {
                 <input type="tel"
                        name="contactNumber"
                        placeholder="Tel: +12 345 6789 012"
-                       pattern="^(00|\+)\d{2} \d{3} \d{4} \d{3}$"
+                       pattern={config.PHONE_NUMBER_FORMAT}
                        maxLength="17"
                        value={this.state.contactNumber}
                        onChange={this.handleChange.bind(this)}

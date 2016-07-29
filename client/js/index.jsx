@@ -1,18 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import thunk from 'redux-thunk'
-import {fromJS} from 'immutable';
 
-import * as actions from './store/actions';
-import reducer from './store/reducer';
+import configureStore from './store/configureStore'
+import * as actions from './actions';
 import socket from './tools/socket';
-import {AppContainer} from './components/App';
+import App from './containers/App';
 
 import styles from '../styles/global.less';
 
-const store = createStore(reducer, fromJS({}), applyMiddleware(thunk));
+const store = configureStore();
 store.dispatch(actions.loadSpot());
 
 socket
@@ -22,7 +19,7 @@ socket
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppContainer />
+        <App />
     </Provider>,
     document.getElementById('app')
 );

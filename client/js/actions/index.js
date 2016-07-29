@@ -2,14 +2,36 @@ import config from '../../../common/config';
 import socket from '../tools/socket';
 import isInBounds from '../tools/isInBounds';
 
+export const SET_MODE = 'SET_MODE';
+export const OPEN_POPUP = 'OPEN_POPUP';
+export const CHANGE_BOUNDS = 'CHANGE_BOUNDS';
+export const LOAD_SPOTS = 'LOAD_SPOTS';
+export const CREATE_IN_SPOTS = 'CREATE_IN_SPOTS';
+export const UPDATE_IN_SPOTS = 'UPDATE_IN_SPOTS';
+export const REMOVE_FROM_SPOTS = 'REMOVE_FROM_SPOTS';
+export const LOAD_SPOT = 'LOAD_SPOT';
+export const SAVE_SPOT = 'SAVE_SPOT';
+export const REMOVE_SPOT = 'REMOVE_SPOT';
+
+export function setMode (mode) {
+    return { type: SET_MODE, mode };
+}
+
+export function openPopup (coords) {
+    return (dispatch) => {
+        dispatch({ type: OPEN_POPUP, coords });
+        dispatch(updateSpot());
+    };
+}
+
 export function changeBounds (bounds) {
-    return { type: 'CHANGE_BOUNDS', bounds };
+    return { type: CHANGE_BOUNDS, bounds };
 }
 
 export function loadSpots (bounds) {
     return (dispatch) => {
         socket.request('/spots/find_in_bounds', { bounds }).then((spots) => {
-            dispatch({ type: 'LOAD_SPOTS', spots });
+            dispatch({ type: LOAD_SPOTS, spots });
         }).catch();
     }
 }
@@ -27,28 +49,17 @@ export function handleBoundsChange (bounds) {
 export function createInSpots (id, spot) {
     return (dispatch, getState) => {
         if (isInBounds([spot.lat, spot.long], getState().get('bounds').toJS())) {
-            dispatch({ type: 'CREATE_IN_SPOTS', id, spot });
+            dispatch({ type: CREATE_IN_SPOTS, id, spot });
         }
     };
 }
 
 export function updateInSpots (id, spot) {
-    return { type: 'UPDATE_IN_SPOTS', id, spot };
+    return { type: UPDATE_IN_SPOTS, id, spot };
 }
 
 export function removeFromSpots (id) {
-    return { type: 'REMOVE_FROM_SPOTS', id };
-}
-
-export function setMode (mode) {
-    return { type: 'SET_MODE', mode };
-}
-
-export function openPopup (coords) {
-    return (dispatch) => {
-        dispatch({ type: 'OPEN_POPUP', coords });
-        dispatch(updateSpot());
-    };
+    return { type: REMOVE_FROM_SPOTS, id };
 }
 
 export function loadSpot () {
@@ -58,7 +69,7 @@ export function loadSpot () {
         if (match && match[1]) {
             socket.request('/spots/find_by_id', { id: match[1] }).then((spot) => {
                 dispatch(setMode(config.MODE_DONOR));
-                dispatch({ type: 'LOAD_SPOT', spot });
+                dispatch({ type: LOAD_SPOT, spot });
             });
         }
     }
@@ -72,7 +83,7 @@ export function createSpot (spot) {
 
         socket.request('/spots/create', { spot }).then((spot) => {
             history.replaceState({}, null, '/donor/' + spot._id);
-            dispatch({ type: 'SAVE_SPOT', spot });
+            dispatch({ type: SAVE_SPOT, spot });
         }).catch(alert);
     };
 }
@@ -92,7 +103,7 @@ export function updateSpot (params) {
         }).toJS();
         
         socket.request('/spots/update', { spot }).then((spot) => {
-            dispatch({ type: 'SAVE_SPOT', spot });
+            dispatch({ type: SAVE_SPOT, spot });
         }).catch(alert);
     };
 }
@@ -102,7 +113,7 @@ export function removeSpot () {
         const id = getState().get('spot').get('_id');
 
         socket.request('/spots/remove', { id }).then((params) => {
-            dispatch({ type: 'REMOVE_SPOT', id: params.id });
+            dispatch({ type: REMOVE_SPOT, id: params.id });
             dispatch(setMode(config.MODE_PATIENT));
         }).catch(alert);
     };

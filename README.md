@@ -14,3 +14,6 @@ This may be optimized in different ways:
 - Using complex multi-polygon area as sum of loaded bounds and subtract it out of current bounds before making request.
 - Using [ArcGIS Map Service](http://server.arcgis.com/en/server/latest/publish-services/windows/what-is-a-map-service.htm) or [ArcGIS Feature Service](http://server.arcgis.com/en/server/latest/publish-services/windows/what-is-a-feature-service-.htm).
 - Using another cartographical API (i.e. [Yandex.Maps Remote Object Manager](https://tech.yandex.com/maps/doc/jsapi/2.1/dg/concepts/remote-object-manager/about-docpage/)).
+
+# Screenshot
+<img src="http://chatik.ajaxy.ru/uploads/showcase-1-1469821646618.png" width="405" /> 

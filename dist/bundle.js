@@ -8013,7 +8013,7 @@ webpackJsonp([0],[
 	});
 
 	exports.default = function (point, bounds) {
-	    return bounds[0][0] < point[0] && bounds[0][1] < point[1] && point[0] < bounds[1][0] && point[1] < bounds[1][1];
+	    return bounds[0][0] <= point[0] && bounds[0][1] <= point[1] && point[0] <= bounds[1][0] && point[1] <= bounds[1][1];
 	};
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(284); if (makeExportsHot(module, __webpack_require__(152))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "isInBounds.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -8123,7 +8123,7 @@ webpackJsonp([0],[
 
 	            case 'LOAD_SPOT':
 	                return {
-	                    v: setFromJs(state, spot, action.spot)
+	                    v: setFromJs(state, 'spot', action.spot)
 	                };
 	        }
 	    }();
@@ -10496,6 +10496,11 @@ webpackJsonp([0],[
 	            return _react2.default.createElement(
 	                'form',
 	                { className: classNames.join(' '), onSubmit: this.handleSubmit.bind(this) },
+	                this.props.spot ? _react2.default.createElement(
+	                    'div',
+	                    { className: _SpotForm2.default['success'] },
+	                    'Thank you!'
+	                ) : '',
 	                _react2.default.createElement('input', { type: 'text',
 	                    name: 'firstName',
 	                    placeholder: 'First name',

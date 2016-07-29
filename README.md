@@ -4,6 +4,8 @@
 2. Run `npm i`
 3. Run `npm run start`
 
+*Note. Make sure that you have MongoDB installed and running.*
+
 # Lazy loading
 Lazy loading of spots is made in a primitive way. Each time map bounds is changed (map has been moved or zoomed), a socket.io-request is made to a server. Bunch of received spots are being compared to existing ones and if there is something new, spots are re-rendered.
 

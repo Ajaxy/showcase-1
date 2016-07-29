@@ -1,15 +1,20 @@
+import Server from 'socket.io';
 import S from 'string';
 
 import * as spotsController from '../controllers/spots';
+
+const io = new Server().attach(8090);
+
+io.on('connection', (socket) => {
+    socket.on('request', onRequest);
+});
+
+export default io;
 
 // May be enhanced with async module loader to use with multiple controllers.
 const controllers = {
     spots: spotsController
 };
-
-export default function setupSocketRouter (socket) {
-    socket.on('request', onRequest);
-}
 
 function onRequest (data, cb) {
     const promise = route(data.url, data.params);

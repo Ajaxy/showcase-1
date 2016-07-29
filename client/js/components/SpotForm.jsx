@@ -27,7 +27,7 @@ export default class SpotForm extends React.Component {
         }
     }
 
-    onSubmit (e) {
+    handleSubmit (e) {
         e.preventDefault();
 
         if (this.props.spot) {
@@ -58,6 +58,13 @@ export default class SpotForm extends React.Component {
         this.setState({ [name]: value });
     }
 
+    handleDelete (e) {
+        if (confirm('Are you sure?')) {
+            this.props.removeSpot();
+            this.props.onRemoveSpot();
+        }
+    }
+
     render () {
         const classNames = [styles['form']];
 
@@ -66,7 +73,7 @@ export default class SpotForm extends React.Component {
         }
 
         return (
-            <form className={classNames.join(' ')} onSubmit={this.onSubmit.bind(this)}>
+            <form className={classNames.join(' ')} onSubmit={this.handleSubmit.bind(this)}>
                 <input type="text"
                        name="firstName"
                        placeholder="First name"
@@ -114,6 +121,14 @@ export default class SpotForm extends React.Component {
                        value={this.props.spot ? 'Update donor spot' : 'Create donor spot'}
                        className={styles['submit']}
                 />
+                {this.props.spot ?
+                    <input type="button"
+                           value="Delete spot"
+                           onClick={this.handleDelete.bind(this)}
+                           className={styles['submit']}
+                    />
+                    : ''}
+                
             </form>
         );
     }

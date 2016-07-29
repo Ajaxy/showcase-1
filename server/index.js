@@ -1,13 +1,11 @@
 import path from 'path';
 import mongoose from 'mongoose';
 import express from 'express';
-import Server from 'socket.io';
 
-import setupSocketRouter from './tools/socketRouter';
+import io from './tools/io';
 
 setupDb();
 setupExpress();
-setupIo();
 
 function setupDb () {
     mongoose.Promise = Promise;
@@ -26,9 +24,4 @@ function setupExpress () {
         .use('/donor/*', express.static(`${clientDir}/index.html`))
         .use(express.static(clientDir))
         .listen(8085, () => { console.log('Listening port 8085'); });
-}
-
-function setupIo () {
-    const io = new Server().attach(8090);
-    io.on('connection', setupSocketRouter);
 }

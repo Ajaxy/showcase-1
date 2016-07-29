@@ -90,21 +90,25 @@ export default ({ container, center, zoom, onBoundsChange, onPopupOpen }) => {
                 });
             };
 
-            view.addSpot = (spot) => {
-                featureLayer.source.push({
-                    geometry: new Point({
-                        longitude: spot.long,
-                        latitude: spot.lat,
-                        spatialReference: SpatialReference.WebMercator
-                    }),
-                    symbol: new PictureMarkerSymbol({
-                        width: '16px',
-                        height: '16px',
-                        url: '/img/icon.png'
-                    }),
-                    attributes: spot
+            view.setupSpots = (spots) => {
+                featureLayer.source.removeAll();
+                spots.forEach((spot) => {
+                    featureLayer.source.push({
+                        geometry: new Point({
+                            longitude: spot.long,
+                            latitude: spot.lat,
+                            spatialReference: SpatialReference.WebMercator
+                        }),
+                        symbol: new PictureMarkerSymbol({
+                            width: '16px',
+                            height: '16px',
+                            url: '/img/icon.png'
+                        }),
+                        attributes: spot
+                    });
                 });
             };
+
 
             view.watch('extent', (extent) => {
                 onBoundsChange([
@@ -126,9 +130,9 @@ export default ({ container, center, zoom, onBoundsChange, onPopupOpen }) => {
     });
 
     return {
-        addSpot: (spot) => {
+        setupSpots: (spots) => {
             ready.then(() => {
-                view.addSpot(spot);
+                view.setupSpots(spots);
             });
         },
 
@@ -143,6 +147,12 @@ export default ({ container, center, zoom, onBoundsChange, onPopupOpen }) => {
         openPopup: ({ coords, content, url }) => {
             ready.then(() => {
                 view.openPopup(coords, content, url);
+            });
+        },
+
+        closePopup: () => {
+            ready.then(() => {
+                view.popup.close();
             });
         }
     };

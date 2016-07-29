@@ -30,6 +30,35 @@ describe('spotController', () => {
                 expect(spots[0].firstName).to.equal(mock.get('firstName'));
             });
     });
+
+    it('should update Spot', () => {
+        let created;
+
+        return Spot.create(mock.toJS())
+            .then((spot) => {
+                created = spot.updated;
+                return spot;
+            })
+            .then((spot) => controller.update({ spot: Object.assign(spot, { firstName: 'New name' }) }))
+            .then(() => Spot.find({}))
+            .then((spots) => {
+                expect(spots.length).to.equal(1);
+                expect(spots[0].firstName).to.equal('New name');
+                expect(spots[0].updated).to.be.gt(created);
+            });
+    });
+
+    it('should remove Spot', () => {
+        return Spot.create(mock.toJS())
+            .then((spot) => controller.remove({ id: spot._id }))
+            .then((result) => {
+                expect(result.id).to.be.a('string');
+            })
+            .then(() => Spot.find({}))
+            .then((spots) => {
+                expect(spots.length).to.equal(0);
+            });
+    });
     
     it('should find Spot by ID', () => {
         return Spot.create(mock.toJS())

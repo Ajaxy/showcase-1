@@ -11,7 +11,8 @@ const mock = fromJS({
     lastName: 'Doe',
     contactNumber: '+18 777 6092 233',
     email: 'john@doe.com',
-    bloodGroup: 2
+    bloodGroup: 2,
+    ip: '127.0.0.1'
 });
 
 describe('Spot', () => {

@@ -12,8 +12,8 @@ export function findInBounds (params) {
     });
 }
 
-export function create (params) {
-    return Spot.create(params.spot)
+export function create (params, socket) {
+    return Spot.create(Object.assign(params.spot, { ip: socket.conn.remoteAddress }))
         .then((spot) => {
             io.emit('spotcreate', { spot: spot, id: spot.id });
             
@@ -21,10 +21,13 @@ export function create (params) {
         });
 }
 
-export function update (params) {
+export function update (params, socket) {
     return Spot.findById(params.spot._id).then((spot) => {
         // Whitelist filter for params needed.
-        Object.assign(spot, params.spot, { updated: Date.now() });
+        Object.assign(spot, params.spot, {
+            updated: Date.now(),
+            ip: socket.conn.remoteAddress
+        });
 
         return spot.save();
     }).then((spot) => {

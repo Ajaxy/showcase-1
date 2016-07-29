@@ -49,6 +49,10 @@ const spotSchema = new Schema({
             message: '{VALUE} is not a valid Email!'
         }
     },
+    ip: {
+        type: String,
+        required: true
+    },
     updated: {
         type: Date,
         default: Date.now,

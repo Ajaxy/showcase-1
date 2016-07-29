@@ -17,7 +17,7 @@ const controllers = {
 };
 
 function onRequest (data, cb) {
-    const promise = route(data.url, data.params);
+    const promise = route(data.url, data.params, this);
 
     if (cb) {
         promise
@@ -26,7 +26,7 @@ function onRequest (data, cb) {
     }
 }
 
-function route (url, params = {}, source) {
+function route (url, params = {}, socket) {
     return new Promise((resolve, reject) => {
         // MATCH /:controller/:action
         const match = url.match(/^\/([\w\_]+)(\/([\w\_]+))/i);
@@ -50,6 +50,6 @@ function route (url, params = {}, source) {
 
         Object.assign(params, { controller, action });
 
-        resolve(controllerActions[action](params));
+        resolve(controllerActions[action](params, socket));
     });
 }

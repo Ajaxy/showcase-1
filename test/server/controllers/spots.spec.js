@@ -13,7 +13,8 @@ const mock = fromJS({
     lastName: 'Doe',
     contactNumber: '+18 777 6092 233',
     email: 'john@doe.com',
-    bloodGroup: 2
+    bloodGroup: 2,
+    ip: '127.0.0.1'
 });
 
 describe('spotController', () => {
@@ -23,11 +24,12 @@ describe('spotController', () => {
     afterEach(() => Spot.remove({}));
     
     it('should create Spot', () => {
-        return controller.create({ spot: mock.toJS() })
+        return controller.create({ spot: mock.toJS() }, { conn: { remoteAddress: 'Test IP' } })
             .then(() => Spot.find({}))
             .then((spots) => {
                 expect(spots.length).to.equal(1);
                 expect(spots[0].firstName).to.equal(mock.get('firstName'));
+                expect(spots[0].ip).to.equal('Test IP');
             });
     });
 
@@ -39,11 +41,15 @@ describe('spotController', () => {
                 created = spot.updated;
                 return spot;
             })
-            .then((spot) => controller.update({ spot: Object.assign(spot, { firstName: 'New name' }) }))
+            .then((spot) => controller.update(
+                { spot: Object.assign(spot, { firstName: 'New name' }) },
+                { conn: { remoteAddress: 'New IP' } }
+            ))
             .then(() => Spot.find({}))
             .then((spots) => {
                 expect(spots.length).to.equal(1);
                 expect(spots[0].firstName).to.equal('New name');
+                expect(spots[0].ip).to.equal('New IP');
                 expect(spots[0].updated).to.be.gt(created);
             });
     });

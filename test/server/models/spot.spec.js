@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {fromJS} from 'Immutable';
+import {fromJS} from 'immutable';
 
 import * as helpers from '../../helpers';
 import Spot from '../../../server/models/Spot';

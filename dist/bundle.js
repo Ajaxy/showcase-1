@@ -8126,8 +8126,8 @@ webpackJsonp([0],[
 	    }
 
 	    _createClass(Map, [{
-	        key: 'componentWillMount',
-	        value: function componentWillMount() {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
 	            this.map = (0, _setupMap2.default)({
 	                container: 'map-view',
 	                center: _config2.default.INITIAL_MAP_CENTER,
@@ -8901,7 +8901,7 @@ webpackJsonp([0],[
 	    var popupContent = void 0;
 	    var view = void 0;
 	    var ready = new Promise(function (resolve) {
-	        require(['esri/Map', 'esri/views/MapView', 'esri/geometry/Point', 'esri/geometry/ScreenPoint', 'esri/geometry/SpatialReference', 'esri/geometry/support/webMercatorUtils', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/FeatureLayer', 'esri/layers/support/Field', 'esri/widgets/Search', 'esri/widgets/Locate'], function (Map, MapView, Point, ScreenPoint, SpatialReference, webMercatorUtils, PictureMarkerSymbol, FeatureLayer, Field, Search, Locate) {
+	        require(['esri/Map', 'esri/views/MapView', 'esri/PopupTemplate', 'esri/geometry/Point', 'esri/geometry/ScreenPoint', 'esri/geometry/SpatialReference', 'esri/geometry/support/webMercatorUtils', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/FeatureLayer', 'esri/layers/support/Field', 'esri/widgets/Search', 'esri/widgets/Locate'], function (Map, MapView, PopupTemplate, Point, ScreenPoint, SpatialReference, webMercatorUtils, PictureMarkerSymbol, FeatureLayer, Field, Search, Locate) {
 	            var map = new Map({
 	                basemap: 'streets-vector'
 	            });
@@ -8930,21 +8930,31 @@ webpackJsonp([0],[
 	            var featureLayer = new FeatureLayer({
 	                source: [],
 	                fields: [new Field({
-	                    'name': '_id',
-	                    'alias': '_id',
-	                    'type': 'oid'
+	                    name: '_id',
+	                    type: 'oid'
 	                }), new Field({
-	                    'name': 'firstName',
-	                    'alias': 'firstName',
-	                    'type': 'string'
+	                    name: 'firstName',
+	                    type: 'string'
 	                }), new Field({
-	                    'name': 'lastName',
-	                    'alias': 'lastName',
-	                    'type': 'string'
+	                    name: 'lastName',
+	                    type: 'string'
+	                }), new Field({
+	                    name: 'contactNumber',
+	                    type: 'string'
+	                }), new Field({
+	                    name: 'email',
+	                    type: 'string'
+	                }), new Field({
+	                    name: 'bloodGroup',
+	                    type: 'number'
 	                })],
 	                objectIdField: '_id',
 	                geometryType: 'point',
-	                spatialReference: SpatialReference.WebMercator
+	                spatialReference: SpatialReference.WebMercator,
+	                popupTemplate: new PopupTemplate({
+	                    title: '{firstName} {lastName}',
+	                    content: '<ul>\n                        <li>Blood group: {bloodGroup}</li>\n                        <li>Contact number: <span class="masked" onclick="this.className = \'\';">{contactNumber}</span></li>\n                        <li>E-mail: <span class="masked" onclick="this.className = \'\';">{email}</span></li>\n                    </ul>'
+	                })
 	            });
 
 	            map.add(featureLayer);
@@ -8975,11 +8985,7 @@ webpackJsonp([0],[
 	                        height: '16px',
 	                        url: '/img/icon.png'
 	                    }),
-	                    attributes: {
-	                        _id: spot._id,
-	                        firstName: spot.firstName,
-	                        lastName: spot.lastName
-	                    }
+	                    attributes: spot
 	                });
 	            };
 
@@ -9066,7 +9072,7 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, ".nZmL-ocDZ3zhLVZv6SCqs,\n.e55tczbZCPgvzqLZCC939 {\n  width: 100%;\n  height: 100%;\n}\n.esri-popup-main {\n  width: 280px!important;\n}\n.esri-popup-main .esri-popup-content {\n  max-height: 300px!important;\n}\n._11FDKwHiYOLelSxl2jcC4C .esri-popup-main .esri-close {\n  display: none;\n}\n.esri-popup-main .url {\n  font-size: 10px;\n}\n", ""]);
+	exports.push([module.id, ".nZmL-ocDZ3zhLVZv6SCqs,\n.e55tczbZCPgvzqLZCC939 {\n  width: 100%;\n  height: 100%;\n}\n.esri-popup-main {\n  width: 280px!important;\n}\n.esri-popup-main .esri-popup-content {\n  max-height: 300px !important;\n}\n.esri-popup-main .esri-popup-content .masked {\n  position: relative;\n}\n.esri-popup-main .esri-popup-content .masked:after {\n  position: absolute;\n  content: \"Click to show\";\n  top: 0;\n  left: 0;\n  background: white;\n  width: 100%;\n  height: 100%;\n  line-height: 15px;\n  color: #777777;\n  text-decoration: underline;\n}\n._11FDKwHiYOLelSxl2jcC4C .esri-popup-main .esri-close {\n  display: none;\n}\n.esri-popup-main .url {\n  font-size: 10px;\n}\n", ""]);
 
 	// exports
 	exports.locals = {

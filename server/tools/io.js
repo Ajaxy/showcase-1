@@ -5,9 +5,11 @@ import * as spotsController from '../controllers/spots';
 
 const io = new Server().attach(8090);
 
-io.on('connection', (socket) => {
-    socket.on('request', onRequest);
-});
+io.setup = () => {
+    io.on('connection', (socket) => {
+        socket.on('request', onRequest);
+    });   
+};
 
 export default io;
 

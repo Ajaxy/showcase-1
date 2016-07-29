@@ -5,11 +5,9 @@
   "author": "Alexander Zinchuk",
   "license": "ISC",
   "scripts": {
-    "dev:client": "webpack && webpack-dev-server",
-    "dev:server": "babel-node server/index.js",
+    "start": "babel-node server/index.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/init.js \"test/**/*@(.js)\"",
-    "test:watch": "npm run test -- --watch",
-    "prod:client": "webpack -p --config webpack.prod.config.js"
+    "test:watch": "npm run test -- --watch"
   },
   "babel": {
     "presets": [
@@ -37,7 +35,8 @@
     "react-hot-loader": "^1.3.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
     "express": "^4.14.0",

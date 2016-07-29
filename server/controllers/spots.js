@@ -34,7 +34,7 @@ export function update (params, socket) {
         io.emit('spotupdate', { spot: spot, id: spot.id });
         
         return spot;
-    }).catch(console.log.bind(console));
+    });
 }
 
 export function remove (params) {

@@ -8,7 +8,7 @@ import setupMap from '../tools/setupMap';
 import styles from '../../styles/components/Map.less';
 
 export default class Map extends React.Component {
-    componentWillMount () {
+    componentDidMount () {
         this.map = setupMap({
             container: 'map-view',
             center: config.INITIAL_MAP_CENTER,

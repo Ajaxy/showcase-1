@@ -5,6 +5,7 @@ export default ({ container, center, zoom, onBoundsChange, onPopupOpen }) => {
         __non_webpack_require__([
             'esri/Map',
             'esri/views/MapView',
+            'esri/PopupTemplate',
             'esri/geometry/Point',
             'esri/geometry/ScreenPoint',
             'esri/geometry/SpatialReference',
@@ -15,7 +16,7 @@ export default ({ container, center, zoom, onBoundsChange, onPopupOpen }) => {
             'esri/widgets/Search',
             'esri/widgets/Locate'
         ], (
-            Map, MapView, Point, ScreenPoint, SpatialReference, webMercatorUtils,
+            Map, MapView, PopupTemplate, Point, ScreenPoint, SpatialReference, webMercatorUtils,
             PictureMarkerSymbol, FeatureLayer, Field, Search, Locate
         ) => {
             const map = new Map({
@@ -46,21 +47,35 @@ export default ({ container, center, zoom, onBoundsChange, onPopupOpen }) => {
             const featureLayer = new FeatureLayer({
                 source: [],
                 fields: [new Field({
-                        'name': '_id',
-                        'alias': '_id',
-                        'type': 'oid'
-                    }), new Field({
-                        'name': 'firstName',
-                        'alias': 'firstName',
-                        'type': 'string'
-                    }), new Field ({
-                        'name': 'lastName',
-                        'alias': 'lastName',
-                        'type': 'string'
-                    })],
+                    name: '_id',
+                    type: 'oid'
+                }), new Field({
+                    name: 'firstName',
+                    type: 'string'
+                }), new Field ({
+                    name: 'lastName',
+                    type: 'string'
+                }), new Field({
+                    name: 'contactNumber',
+                    type: 'string'
+                }), new Field ({
+                    name: 'email',
+                    type: 'string'
+                }), new Field ({
+                    name: 'bloodGroup',
+                    type: 'number'
+                })],
                 objectIdField: '_id',
                 geometryType: 'point',
-                spatialReference: SpatialReference.WebMercator
+                spatialReference: SpatialReference.WebMercator,
+                popupTemplate: new PopupTemplate({
+                    title: '{firstName} {lastName}',
+                    content: `<ul>
+                        <li>Blood group: {bloodGroup}</li>
+                        <li>Contact number: <span class="masked" onclick="this.className = '';">{contactNumber}</span></li>
+                        <li>E-mail: <span class="masked" onclick="this.className = '';">{email}</span></li>
+                    </ul>`
+                })
             });
 
             map.add(featureLayer);
@@ -87,11 +102,7 @@ export default ({ container, center, zoom, onBoundsChange, onPopupOpen }) => {
                         height: '16px',
                         url: '/img/icon.png'
                     }),
-                    attributes: {
-                        _id: spot._id,
-                        firstName: spot.firstName,
-                        lastName: spot.lastName
-                    }
+                    attributes: spot
                 });
             };
 

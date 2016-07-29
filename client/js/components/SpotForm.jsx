@@ -74,6 +74,7 @@ export default class SpotForm extends React.Component {
 
         return (
             <form className={classNames.join(' ')} onSubmit={this.handleSubmit.bind(this)}>
+                {this.props.spot ? <div className={styles['success']}>Thank you!</div> : ''}
                 <input type="text"
                        name="firstName"
                        placeholder="First name"

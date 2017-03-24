@@ -1,5 +1,5 @@
 # Demo
-http://showcase-1.zinchuk.com:8080/
+Stopped
 
 # Install and run
 
